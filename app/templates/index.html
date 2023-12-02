@@ -1,0 +1,40 @@
+{% extends "base.html" %} 
+
+{% block title %}Show Tasks{% endblock title %} 
+
+
+{% block content %}
+
+    {% if tasks_list %}
+        <table class="table table-bordered">
+            <thead>
+              <tr class="text-center">
+                <th scope="col">Title</th>
+                <th scope="col">Description</th>
+                <th scope="col">Status</th>
+                <th scope="col">Action</th>
+              </tr>
+            </thead>
+            <tbody>
+                {% for task in tasks_list%}
+                <tr class="text-center">
+                    <th>{{task.taskTitle}}</th>
+                    <td>{{task.taskDescription}}</td>
+                    <td>Incomplete</td>
+                    <td>
+                        <a href="{% url 'delete_task' task.id %}"><button type="button" class="btn btn-danger">Delete</button></a>
+                        <a href="{% url 'edit_task' task.id %}"><button type="button" class="btn btn-warning">Edit</button></a>
+                        <a href="{% url 'make_complete_task' task.id %}"><button type="button" class="btn btn-success">Complete</button></a>
+                    </td>
+                </tr>
+              {% endfor%}
+            </tbody>
+          </table>
+
+
+    {% else %}
+        <h3>No Task</h3>
+    {% endif %}
+
+
+{% endblock content %}
